@@ -10,4 +10,5 @@ use (
 	./rick
 	./shuffle
 	./matrix
+	./advancedmatrix
 )
