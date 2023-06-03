@@ -7,37 +7,38 @@ import (
 )
 
 func main() {
-	rows := 90
-	cols := 90
-	minValue := 1
-	maxValue := 12375091
+	rows := 500
+	cols := 500
+
+	symbols := []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}[]|\\;:'\",.<>?")
 
 	for {
-		matrix := generateMatrix(rows, cols, minValue, maxValue)
+		matrix := generateMatrix(rows, cols, symbols)
 		displayMatrix(matrix)
 
 	}
 }
 
-func generateMatrix(rows, cols, minValue, maxValue int) [][]int {
+func generateMatrix(rows, cols int, symbols []rune) [][]rune {
 	rand.Seed(time.Now().UnixNano())
 
-	matrix := make([][]int, rows)
+	matrix := make([][]rune, rows)
+	flattened := make([]rune, rows*cols)
+
 	for i := 0; i < rows; i++ {
-		matrix[i] = make([]int, cols)
+		matrix[i] = flattened[i*cols : (i+1)*cols]
 		for j := 0; j < cols; j++ {
-			matrix[i][j] = rand.Intn(maxValue-minValue+1) + minValue
+			matrix[i][j] = symbols[rand.Intn(len(symbols))]
 		}
 	}
 
 	return matrix
 }
 
-func displayMatrix(matrix [][]int) {
-	fmt.Println("Matrix:")
+func displayMatrix(matrix [][]rune) {
 	for _, row := range matrix {
 		for _, value := range row {
-			fmt.Printf("%d\t", value)
+			fmt.Printf("\033[32m%c\t\033[0m", value) // Set text color to green
 		}
 		fmt.Println()
 	}
