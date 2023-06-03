@@ -2,6 +2,10 @@ go 1.20
 
 use (
 	./Guess-The-Number
-	./Rock-Paper-Scissors
 	./Hangman
+	./Rock-Paper-Scissors
+	./tic-tac-toe
+	./Doom
+	./useless
+	./rick
 )
